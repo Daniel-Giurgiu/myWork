@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <style>
+            tr.border-bottom td {
+                border-bottom: 3pt solid black;
+            }
+        </style>
+        <link href="/imagg/brad.png">
+        <script src="https://kit.fontawesome.com/88f7a20a26.js" crossorigin="anonymous"></script>
+    </head>
+    
+    <body>
+        {% extends 'base.html' %}
+        
+        {% block content%}
+        <div>
+            <div id="myDynamicTable" onclick="addTable()">➕</div>
+        </div>
+        <table class="table">
+            <tr > 
+                <th>ID</th>
+                <th>Photo</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>height</th>
+                <th>Delete</th>
+            </tr>
+
+        {% for u in usr %}
+        <tr id={{u.ID}} class="border-bottom ">
+            <td class="{{u.ID}}" id = {{loop.index}}>{{ loop.index }}</td>
+            <td><img src="/imag/{{u.thumbnail}}"></td>
+            <td class="FirstName" ondblclick="update(this, 'FirstName', '{{u.ID}}', '{{u.FirstName}}')">{{ u.FirstName }}</td>
+            <td class="LastName" ondblclick="update(this, 'LastName', '{{u.ID}}', '{{u.LastName}}')">{{ u.LastName }}</td>
+            <td class="height" ondblclick="update(this, 'height', '{{u.ID}}', '{{u.height}}')">{{ u.height }}</td>
+            
+            <td>
+                <button class="btn btn-outline-danger" onclick="deleteMe('{{ u.ID }}')" ><i class="fa-sharp fa-solid fa-trash"></i></button>
+            </td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+    <script src="../js/file.js"></script>
+    {% endblock %}
+    
+</body>
+</html>
+
+
